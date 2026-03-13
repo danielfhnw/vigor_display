@@ -17,6 +17,7 @@ using RedisData = std::unordered_map<std::string, std::string>;
 
 //  Section ::  Function Headers
 RedisData readRedis();
+void writeStartupState(); // Setzt den Startzustand in Redis, damit bei 99% hängen bleibt
 uint8_t SetupHWSPI(void); // setup + user options for hardware SPI 0
 
 RedisData readRedis()
@@ -46,7 +47,28 @@ RedisData readRedis()
 	return data;
 }
 
+void writeStartupState()
+{
+    redisContext *c = redisConnect("127.0.0.1", 6379);
 
+    if (c == nullptr || c->err)
+    {
+        std::cerr << "Redis Connection Error" << std::endl;
+        if (c)
+            redisFree(c);
+        return;
+    }
+
+    redisReply *reply = (redisReply *)redisCommand(c, "SET %s %s", "hmi_state", "STARTUP");
+
+    if (reply == nullptr)
+    {
+        std::cerr << "Redis Write Error" << std::endl;
+    }
+
+    freeReplyObject(reply);
+    redisFree(c);
+}
 
 int main()
 {
@@ -54,6 +76,7 @@ int main()
 		return -1; // Hardware SPI 0 initialisieren fehlgeschlagen
 	
 	std::cout << "State: StartUp" << std::endl;
+	writeStartupState(); // Setzt den Startzustand in Redis, damit bei 99% hängen bleibt
 	myVigorTFT.createInitDisplay();
 
 	while (true)
