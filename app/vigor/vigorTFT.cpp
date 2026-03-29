@@ -25,18 +25,15 @@ void vigorTFT::createInitDisplay()
 
 	// Set Display parameter
 
-	uint16_t x = 40;			   // Set x Poition Logo effective Value left top corner Display
+	uint16_t x = (myTFTWidth - logoVigorWidth) / 2;			   // Set x Poition Logo effective Value left top corner Display
 	uint16_t y = 15;			   // Set y Poition Logo effective Value left top corner Display
-	uint16_t loadingBarHight = 38; // Important if is this value bigger than (fontHigh+1+2*lineThickness)
-	uint16_t loadingBarWidth = myTFTWidth - (2 * x);
-	uint16_t spaceMean = ((myTFTHeight - y - logoVigorHeight - loadingBarHight - versionFontHight) / 3);
 
 	// Buils Display
 	this->TFTsetRotation(this->TFT_Degrees_270); // Rotate the display
 	this->fillScreen(RVLC_BLACK);
 	this->drawBMPPicture(x, y, logoVigorWidth, logoVigorHeight, pathLogoVigor);
 
-	this->setCursor(x * 2, y + logoVigorHeight + 2 * spaceMean + loadingBarHight); // set Cursor left top corner
+	this->setCursor(5, myTFTHeight - versionFontHight); // set Cursor bottom left corner
 	this->setFont(font_retro);													// select font
 	this->setTextColor(RVLC_YELLOW, RVLC_BLACK);							// select color
 	this->print(vigorVersion);
@@ -44,13 +41,13 @@ void vigorTFT::createInitDisplay()
 
 void vigorTFT::updateInitDisplay(uint16_t loadingBarValue)
 {
-	uint16_t x = 40;			   // Set x Poition Logo effective Value left top corner Display
+	uint16_t x = (myTFTWidth - logoVigorWidth) / 2;			   // Set x Poition Logo effective Value left top corner Display
 	uint16_t y = 15;			   // Set y Poition Logo effective Value left top corner Display
-	uint16_t loadingBarHight = 38; // Important if is this value bigger than (fontHigh+1+2*lineThickness)
+	uint16_t loadingBarHeight = 38; // Important if is this value bigger than (fontHigh+1+2*lineThickness)
 	uint16_t loadingBarWidth = myTFTWidth - (2 * x);
-	uint16_t spaceMean = ((myTFTHeight - y - logoVigorHeight - loadingBarHight - 16) / 3);
+	uint16_t spaceMean = ((myTFTHeight - y - logoVigorHeight - loadingBarHeight - 16) / 3);
 
-	this->createLoadingBar(x, (y + logoVigorHeight + spaceMean), loadingBarWidth, loadingBarHight, 6, RVLC_GREEN, RVLC_DGREEN, loadingBarValue, true);
+	this->createLoadingBar(x, (y + logoVigorHeight + spaceMean), loadingBarWidth, loadingBarHeight, 6, RVLC_GREEN, RVLC_DGREEN, loadingBarValue, true);
 }
 
 void vigorTFT::createDisplay(

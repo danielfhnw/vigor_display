@@ -12,12 +12,12 @@
 #include "ST7789_TFT_LCD_RVL.hpp"
 #include "layout.h"
 
-#define myTFTWidth 240
-#define myTFTHeight 320
+#define myTFTWidth 320
+#define myTFTHeight 240
 #define logoVigorWidth 240	
 #define logoVigorHeight 122
 #define pathLogoVigor "bitmap/Vigor_Logo_o_Hg_16-bitRGB565.bmp"
-const std::string vigorVersion = "Vigor TFT version 1.0";
+const std::string vigorVersion = "Vigor v1.0.0-beta";
 
 // Datatype definitions
 using message = std::string;
