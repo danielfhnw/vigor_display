@@ -78,6 +78,21 @@ int main()
 	std::cout << "State: StartUp" << std::endl;
 	writeStartupState(); // Setzt den Startzustand in Redis, damit bei 99% hängen bleibt
 	myVigorTFT.createInitDisplay();
+	for (int i = 0; i < 100; i++) // for-loop for loading bar
+	{
+		myVigorTFT.updateInitDisplay(i);
+		RedisData data = readRedis();
+		auto stateIt = data.find("hmi_state");
+		if (stateIt != data.end())
+		{
+			const std::string &stateString = stateIt->second;
+			std::cout << "State: " << stateString << " - Loading: " << i << "%" << std::endl;
+			if (stateString == "STARTUP")
+			{
+				std::this_thread::sleep_for(std::chrono::milliseconds(300));
+			}
+		}
+	}
 
 	while (true)
 	{

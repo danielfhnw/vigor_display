@@ -40,12 +40,17 @@ void vigorTFT::createInitDisplay()
 	this->setFont(font_retro);													// select font
 	this->setTextColor(RVLC_YELLOW, RVLC_BLACK);							// select color
 	this->print(vigorVersion);
+}
 
-	for (int i = 0; i < 100; i++) // for-loop for loading bar
-	{
-		this->createLoadingBar(x, (y + logoVigorHeight + spaceMean), loadingBarWidth, loadingBarHight, 6, RVLC_GREEN, RVLC_DGREEN, i, true);
-		std::this_thread::sleep_for(std::chrono::milliseconds(300));
-	}
+void vigorTFT::updateInitDisplay(uint16_t loadingBarValue)
+{
+	uint16_t x = 40;			   // Set x Poition Logo effective Value left top corner Display
+	uint16_t y = 15;			   // Set y Poition Logo effective Value left top corner Display
+	uint16_t loadingBarHight = 38; // Important if is this value bigger than (fontHigh+1+2*lineThickness)
+	uint16_t loadingBarWidth = myTFTWidth - (2 * x);
+	uint16_t spaceMean = ((myTFTHeight - y - logoVigorHeight - loadingBarHight - 16) / 3);
+
+	this->createLoadingBar(x, (y + logoVigorHeight + spaceMean), loadingBarWidth, loadingBarHight, 6, RVLC_GREEN, RVLC_DGREEN, loadingBarValue, true);
 }
 
 void vigorTFT::createDisplay(
