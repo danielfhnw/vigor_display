@@ -139,8 +139,8 @@ uint8_t SetupHWSPI(void)
 	// ** USER OPTION 2 Screen SetupHWSPI **
 	uint16_t OFFSET_COL = 0;		   // These offsets can be adjusted for any issues->
 	uint16_t OFFSET_ROW = 0;		   // with manufacture tolerance/defects at edge of display
-	uint16_t TFT_WIDTH = myTFTWidth;   // Screen width in pixels
-	uint16_t TFT_HEIGHT = myTFTHeight; // Screen height in pixels
+	uint16_t TFT_WIDTH = myTFTHeight;   // Screen width in pixels - Adjusted for rotation
+	uint16_t TFT_HEIGHT = myTFTWidth; // Screen height in pixels - Adjusted for rotation
 	// myTFT.TFTInitScreenSize(OFFSET_COL, OFFSET_ROW, TFT_WIDTH, TFT_HEIGHT);
 	myVigorTFT.TFTInitScreenSize(OFFSET_COL, OFFSET_ROW, TFT_WIDTH, TFT_HEIGHT);
 	// ***********************************
