@@ -78,6 +78,24 @@ int main()
 	std::cout << "State: StartUp" << std::endl;
 	writeStartupState(); // Setzt den Startzustand in Redis, damit bei 99% hängen bleibt
 	myVigorTFT.createInitDisplay();
+	for (int i = 0; i < 100; i++) // for-loop for loading bar
+	{
+		myVigorTFT.updateInitDisplay(i);
+		RedisData data = readRedis();
+		auto stateIt = data.find("hmi_state");
+		if (stateIt != data.end())
+		{
+			const std::string &stateString = stateIt->second;
+			std::cout << "State: " << stateString << " - Loading: " << i << "%" << std::endl;
+			if (stateString == "STARTUP")
+			{
+				std::this_thread::sleep_for(std::chrono::milliseconds(300));
+			}
+		} else {
+			std::cout << "State: Unknown - Loading: " << i << "%" << std::endl;
+			std::this_thread::sleep_for(std::chrono::milliseconds(300));
+		}
+	}
 
 	while (true)
 	{
@@ -124,8 +142,8 @@ uint8_t SetupHWSPI(void)
 	// ** USER OPTION 2 Screen SetupHWSPI **
 	uint16_t OFFSET_COL = 0;		   // These offsets can be adjusted for any issues->
 	uint16_t OFFSET_ROW = 0;		   // with manufacture tolerance/defects at edge of display
-	uint16_t TFT_WIDTH = myTFTWidth;   // Screen width in pixels
-	uint16_t TFT_HEIGHT = myTFTHeight; // Screen height in pixels
+	uint16_t TFT_WIDTH = myTFTHeight;   // Screen width in pixels - Adjusted for rotation
+	uint16_t TFT_HEIGHT = myTFTWidth; // Screen height in pixels - Adjusted for rotation
 	// myTFT.TFTInitScreenSize(OFFSET_COL, OFFSET_ROW, TFT_WIDTH, TFT_HEIGHT);
 	myVigorTFT.TFTInitScreenSize(OFFSET_COL, OFFSET_ROW, TFT_WIDTH, TFT_HEIGHT);
 	// ***********************************

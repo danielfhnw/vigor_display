@@ -12,12 +12,12 @@
 #include "ST7789_TFT_LCD_RVL.hpp"
 #include "layout.h"
 
-#define myTFTWidth 240
-#define myTFTHeight 320
+#define myTFTWidth 320
+#define myTFTHeight 240
 #define logoVigorWidth 240	
 #define logoVigorHeight 122
 #define pathLogoVigor "bitmap/Vigor_Logo_o_Hg_16-bitRGB565.bmp"
-const std::string vigorVersion = "Vigor TFT version 1.0";
+const std::string vigorVersion = "Vigor v1.0.0-beta";
 
 // Datatype definitions
 using message = std::string;
@@ -39,6 +39,7 @@ public:
 
   // Creates Display Methods
   void createInitDisplay();
+  void updateInitDisplay(uint16_t loadingBarValue);
   void createLoadingBar(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t lineThickness, uint16_t colorFrame, uint16_t colorBar, uint16_t barValue, bool showValue);
   void createDisplay(const std::unordered_map<std::string, std::string> &data, const std::string &currentState);
   // Set Bitmap Picture
