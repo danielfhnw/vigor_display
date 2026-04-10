@@ -17,7 +17,7 @@
 #define logoVigorWidth 240	
 #define logoVigorHeight 122
 #define pathLogoVigor "bitmap/Vigor_Logo_o_Hg_16-bitRGB565.bmp"
-const std::string vigorVersion = "Vigor v1.0.0-beta";
+const std::string vigorVersion = "Vigor v1.0.0";
 
 // Datatype definitions
 using message = std::string;
