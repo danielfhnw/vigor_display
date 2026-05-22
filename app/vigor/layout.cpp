@@ -16,6 +16,7 @@ std::unordered_map<std::string, TextBoxDefinition> textBoxDefs = {
     {"tb_fehler", {"", "Fehlercode:", 16, 16, 288, 32, false}},
     {"tb_fehlerbeschrieb", {"hmi_fehler", "Fehlerbeschreibung", 16, 52, 288, 16, false}},
     {"tb_b1_auf", {"", "auf", 262, 14, 48, 32, false}},
+    {"tb_b1_cal", {"", "cal", 262, 14, 48, 32, false}},
     {"tb_b2_zu", {"", "zu", 278, 74, 48, 32, false}},
     {"tb_b3_+", {"", "+", 294, 134, 16, 32, false}},
     {"tb_b3_ja", {"", "Ja", 278, 134, 32, 32, false}},
@@ -42,7 +43,7 @@ std::unordered_map<std::string, Screen> screens = {
             {
                 {"tb_vend_ist_l", RVLC_GREY},
                 {"tb_vend_soll", RVLC_YELLOW},
-                {"tb_b1_auf", RVLC_YELLOW},
+                {"tb_b1_cal", RVLC_YELLOW},
                 {"tb_b2_zu", RVLC_YELLOW},
                 {"tb_b3_+", RVLC_YELLOW},
                 {"tb_b4_-", RVLC_YELLOW}
